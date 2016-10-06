@@ -3,6 +3,8 @@ package com.example.usuario.loginrelative;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.example.usuario.loginrelative.modelo.User;
+
 /**
  * Created by usuario on 6/10/16.
  */
@@ -32,6 +34,12 @@ public class LoginPresenter implements ILoginMvp.Presenter {
             view.setMessageError(((Context)view).getResources().getString(R.string.password_lenght));
         else{
             //Guardar al ususario en la clase Application.
+            /**
+             * ((Context)view) -> Contexto de la actividad
+             * ((Context)view).GetApplicationContext() -> Objeto de la aplicación.
+             * ((LoginAplication)((Context)view).getAplicationContext()) -> Objeto LoginApplication
+             */
+            ((LoginAplication)((Context)view).getApplicationContext()).setUser(new User(user, password));
         }
     }
 }

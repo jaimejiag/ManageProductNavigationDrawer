@@ -2,6 +2,7 @@ package com.example.usuario.loginrelative;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ public class LoginRelative_Activity extends AppCompatActivity implements ILoginM
     private EditText edtUser;
     private Button btnOk;
     private Button btnCancel;
+    private final String TAG = "loginrelative";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,32 @@ public class LoginRelative_Activity extends AppCompatActivity implements ILoginM
             }
         });
 
+        btnCancel = (Button) findViewById(R.id.btn_cancel);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetValues();
+            }
+        });
+
+        //Comprobar la persistencia del objeto Application
+        if (((LoginAplication)getApplicationContext()).getUser() != null)
+            Log.d("TAG", ((LoginAplication)getApplicationContext()).getUser().toString());
+    }
+
+    private void resetValues() {
+        edtUser.setText("");
+        edtPassword.setText("");
     }
 
     @Override
     public void setMessageError(String messageError) {
         Toast.makeText(this, messageError, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "Activity finalizada");
     }
 }
