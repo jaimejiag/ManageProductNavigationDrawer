@@ -59,8 +59,15 @@ public class LoginRelative_Activity extends AppCompatActivity implements ILoginM
     }
 
     @Override
-    public void setMessageError(String messageError) {
-        Toast.makeText(this, messageError, Toast.LENGTH_SHORT).show();
+    public void setMessageError(String messageError, int idView) {
+        //Toast.makeText(this, messageError, Toast.LENGTH_SHORT).show();
+        switch (idView){
+            case R.id.edt_user:
+                edtUser.setError(messageError);
+                break;
+            case R.id.edt_password:
+                edtPassword.setError(messageError);
+        }
     }
 
     @Override

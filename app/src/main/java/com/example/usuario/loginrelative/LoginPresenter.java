@@ -19,19 +19,21 @@ public class LoginPresenter implements ILoginMvp.Presenter {
 
     @Override
     public void validateCredentials(String user, String password) {
-        if (TextUtils.isEmpty(user) || TextUtils.isEmpty(password))
+        if (TextUtils.isEmpty(user))
         /**
          * Para acceder a los mensajes de 'errors.xml' es necesario el método 'getResources'
          * Para acceder a ese método necesitamos un objeto que herede de 'Context'
          * De ahí el casting ((Context)view).
          */
-            view.setMessageError(((Context)view).getResources().getString(R.string.data_empty));
+            view.setMessageError(((Context)view).getResources().getString(R.string.data_empty), R.id.edt_user);
+        else if (TextUtils.isEmpty(password))
+            view.setMessageError(((Context)view).getResources().getString(R.string.data_empty), R.id.edt_password);
         else if (!password.matches(".*[0-9].*"))
-            view.setMessageError(((Context)view).getResources().getString(R.string.password_digit));
+            view.setMessageError(((Context)view).getResources().getString(R.string.password_digit), R.id.edt_password);
         else if (!password.matches(".*[a-z].*") || !password.matches(".*[A-Z].*"))
-            view.setMessageError(((Context)view).getResources().getString(R.string.password_case));
+            view.setMessageError(((Context)view).getResources().getString(R.string.password_case), R.id.edt_password);
         else if (password.length() < 8)
-            view.setMessageError(((Context)view).getResources().getString(R.string.password_lenght));
+            view.setMessageError(((Context)view).getResources().getString(R.string.password_lenght), R.id.edt_password);
         else{
             //Guardar al ususario en la clase Application.
             /**
