@@ -18,7 +18,9 @@ public class LoginPresenter implements ILoginMvp.Presenter {
     }
 
     @Override
-    public void validateCredentials(String user, String password) {
+    public boolean validateCredentials(String user, String password) {
+        boolean result = false;
+
         if (TextUtils.isEmpty(user))
         /**
          * Para acceder a los mensajes de 'errors.xml' es necesario el método 'getResources'
@@ -41,7 +43,10 @@ public class LoginPresenter implements ILoginMvp.Presenter {
              * ((Context)view).GetApplicationContext() -> Objeto de la aplicación.
              * ((LoginAplication)((Context)view).getAplicationContext()) -> Objeto LoginApplication
              */
-            ((LoginAplication)((Context)view).getApplicationContext()).setUser(new User(user, password));
+            //((LoginAplication)((Context)view).getApplicationContext()).setUser(new User(user, password));
+            result = true;
         }
+
+        return result;
     }
 }

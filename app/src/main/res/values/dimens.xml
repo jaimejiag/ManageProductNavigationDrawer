@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="widget_margin_top">25dp</dimen>
     <dimen name="widgetTextViewWidth">100dp</dimen>
+    <dimen name="fabtnAdd">430dp</dimen>
 </resources>

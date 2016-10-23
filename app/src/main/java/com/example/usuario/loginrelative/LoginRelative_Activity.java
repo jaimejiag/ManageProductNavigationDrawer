@@ -1,5 +1,6 @@
 package com.example.usuario.loginrelative;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,14 +15,14 @@ import android.widget.Toast;
  * @Version 1.0
  */
 
-public class LoginRelative_Activity extends AppCompatActivity implements ILoginMvp.View{
+public class LoginRelative_Activity extends AppCompatActivity implements ILoginMvp.View {
 
     private ILoginMvp.Presenter loginMvp;
     private EditText edtPassword;
     private EditText edtUser;
     private Button btnOk;
-    private Button btnCancel;
     private final String TAG = "loginrelative";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,21 +37,16 @@ public class LoginRelative_Activity extends AppCompatActivity implements ILoginM
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginMvp.validateCredentials(edtUser.getText().toString(), edtPassword.getText().toString());
-            }
-        });
-
-        btnCancel = (Button) findViewById(R.id.btn_cancel);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetValues();
+                if (loginMvp.validateCredentials(edtUser.getText().toString(), edtPassword.getText().toString())) {
+                    Intent intent = new Intent(getApplicationContext(), ListProductsActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
         //Comprobar la persistencia del objeto Application
-        if (((LoginAplication)getApplicationContext()).getUser() != null)
-            Log.d("TAG", ((LoginAplication)getApplicationContext()).getUser().toString());
+        //if (((LoginAplication)getApplicationContext()).getUser() != null)
+        //    Log.d("TAG", ((LoginAplication)getApplicationContext()).getUser().toString());
     }
 
     private void resetValues() {

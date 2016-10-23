@@ -12,10 +12,10 @@ public interface ILoginMvp {
     int DATA_EMPTY = 4;
 
     interface  View {
-        public void setMessageError(String error, int viewId);
+        void setMessageError(String error, int viewId);
     }
 
     interface Presenter {
-        public void validateCredentials(String user, String password);
+        boolean validateCredentials(String user, String password);
     }
 }
