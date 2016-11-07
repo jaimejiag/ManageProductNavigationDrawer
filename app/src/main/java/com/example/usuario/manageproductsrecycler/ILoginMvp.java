@@ -1,4 +1,4 @@
-package com.example.usuario.loginrelative;
+package com.example.usuario.manageproductsrecycler;
 
 /**
  * Created by usuario on 6/10/16.

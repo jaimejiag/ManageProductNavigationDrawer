@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.usuario.loginrelative">
+    package="com.example.usuario.manageproductsrecycler">
 
     <application
         android:name=".ProductApplication"
@@ -9,15 +9,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginRelative_Activity">
+        <activity android:name=".Login_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListProductsActivity" />
+        <activity android:name=".ProductsActivity" />
         <activity android:name=".AddProduct"></activity>
+        <activity android:name=".AccountSettingsActivity"></activity>
+        <activity android:name=".GeneralSettingsActivity"></activity>
     </application>
 
 </manifest>

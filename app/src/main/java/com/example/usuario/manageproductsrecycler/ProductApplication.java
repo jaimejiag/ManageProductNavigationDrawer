@@ -1,17 +1,18 @@
-package com.example.usuario.loginrelative;
+package com.example.usuario.manageproductsrecycler;
 
 import android.app.Application;
 
-import com.example.usuario.loginrelative.modelo.Product;
+import com.example.usuario.manageproductsrecycler.modelo.Product;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by usuario on 20/10/16.
  */
 
 public class ProductApplication extends Application {
-    private ArrayList products = new ArrayList();
+    private ArrayList<Product> products = new ArrayList();
 
     @Override
     public void onCreate() {
@@ -28,7 +29,14 @@ public class ProductApplication extends Application {
         products.add(product);
     }
 
-    public ArrayList<Product> getProducts(){
+    public ArrayList<Product> getProducts(boolean ascendente){
+        //El segundo argumento es cómo va a compararse, cambiar entre las dos constantes Comparator creados para ordenar de manera distinta.
+        //Collections.sort(products, Product.PRICE_COMPARATOR);
+        //Collections.sort(products, (p1, p2) -> Double.compare(p1.getmPrice(), p2.getmPrice()));
+        if (!ascendente)
+            Collections.sort(products, Collections.reverseOrder());
+        else
+            Collections.sort(products);
         return products;
     }
 }

@@ -1,8 +1,8 @@
-package com.example.usuario.loginrelative;
+package com.example.usuario.manageproductsrecycler;
 
 import android.app.Application;
 
-import com.example.usuario.loginrelative.modelo.User;
+import com.example.usuario.manageproductsrecycler.modelo.User;
 
 /**
  * Created by usuario on 6/10/16.

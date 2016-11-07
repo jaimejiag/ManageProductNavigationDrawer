@@ -1,9 +1,9 @@
-package com.example.usuario.loginrelative;
+package com.example.usuario.manageproductsrecycler;
 
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.example.usuario.loginrelative.modelo.Product;
+import com.example.usuario.manageproductsrecycler.modelo.Product;
 
 /**
  * Created by jaime on 23/10/16.

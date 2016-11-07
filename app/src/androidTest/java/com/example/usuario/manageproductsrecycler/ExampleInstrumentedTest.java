@@ -1,4 +1,4 @@
-package com.example.usuario.loginrelative;
+package com.example.usuario.manageproductsrecycler;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

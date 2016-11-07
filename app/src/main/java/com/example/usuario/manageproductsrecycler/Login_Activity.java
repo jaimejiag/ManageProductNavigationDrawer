@@ -1,4 +1,4 @@
-package com.example.usuario.loginrelative;
+package com.example.usuario.manageproductsrecycler;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 /**
  * This class operate the classic login screen using MVP method.
@@ -15,7 +14,7 @@ import android.widget.Toast;
  * @Version 1.0
  */
 
-public class LoginRelative_Activity extends AppCompatActivity implements ILoginMvp.View {
+public class Login_Activity extends AppCompatActivity implements ILoginMvp.View {
 
     private ILoginMvp.Presenter loginMvp;
     private EditText edtPassword;
@@ -27,7 +26,7 @@ public class LoginRelative_Activity extends AppCompatActivity implements ILoginM
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_relative_);
+        setContentView(R.layout.activity_login);
 
         loginMvp = new LoginPresenter(this);
         edtUser = (EditText) findViewById(R.id.edt_user);
@@ -38,7 +37,7 @@ public class LoginRelative_Activity extends AppCompatActivity implements ILoginM
             @Override
             public void onClick(View v) {
                 if (loginMvp.validateCredentials(edtUser.getText().toString(), edtPassword.getText().toString())) {
-                    Intent intent = new Intent(getApplicationContext(), ListProductsActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ProductsActivity.class);
                     startActivity(intent);
                 }
             }

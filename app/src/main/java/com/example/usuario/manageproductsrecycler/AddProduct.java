@@ -1,15 +1,11 @@
-package com.example.usuario.loginrelative;
+package com.example.usuario.manageproductsrecycler;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.example.usuario.loginrelative.modelo.Product;
 
 public class AddProduct extends AppCompatActivity implements IProductMvp.View{
     IProductMvp.Presenter presenter;
@@ -49,7 +45,7 @@ public class AddProduct extends AppCompatActivity implements IProductMvp.View{
                         edtBrand.getText().toString(),
                         edtPrice.getText().toString(),
                         edtStock.getText().toString())){
-                    Intent intent = new Intent(getApplicationContext(), ListProductsActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ProductsActivity.class);
                     startActivity(intent);
                 }
             }

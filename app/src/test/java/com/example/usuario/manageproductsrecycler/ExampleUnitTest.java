@@ -1,4 +1,4 @@
-package com.example.usuario.loginrelative;
+package com.example.usuario.manageproductsrecycler;
 
 import org.junit.Test;
 

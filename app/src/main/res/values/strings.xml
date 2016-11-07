@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">ManageProducts</string>
+    <string name="app_name">ManageProductsRecycler</string>
+    <string name="action_add_product">Añadir producto</string>
+    <string name="action_sort_alphabetically">Ordenar alfabeticamente</string>
+    <string name="action_settings_general">Opciones generales</string>
+    <string name="action_sattings_account">Configuración cuenta</string>
 </resources>
