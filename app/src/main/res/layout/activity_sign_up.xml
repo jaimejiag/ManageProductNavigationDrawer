@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_sign_up"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.usuario.manageproductsrecycler.SignUpActivity">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/til_userName">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre de usuario"
+            android:id="@+id/edt_userName" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/til_userPassword"
+        android:layout_below="@id/til_userName">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña del usuario"
+            android:id="@+id/edt_userPassword"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/til_userEmail"
+        android:layout_below="@id/til_userPassword">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email del usuario"
+            android:id="@+id/edt_userEmail" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spn_provincia"
+        android:layout_below="@id/til_userEmail"
+        android:layout_marginTop="15dp">
+    </android.support.v7.widget.AppCompatSpinner>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spn_localidad"
+        android:layout_below="@id/spn_provincia"
+        android:layout_marginTop="15dp">
+    </android.support.v7.widget.AppCompatSpinner>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rgrp_individualEnterprise"
+        android:layout_below="@id/spn_localidad"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Qué eres?"
+            android:textSize="16sp"
+            android:layout_marginRight="20dp"/>
+
+        <RadioButton
+            android:text="Particular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbtn_individual"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="Empresa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbtn_enterprise"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"/>
+    </RadioGroup>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edt_enterpriseName"
+        android:hint="Nombre de la empresa"
+        android:layout_below="@id/rgrp_individualEnterprise"
+        android:layout_marginTop="5dp"/>
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/chb_newsletters"
+        android:text="¿Quieres recibir noticias nuestras en su email?"
+        android:layout_below="@id/edt_enterpriseName"
+        android:layout_marginTop="15dp"/>
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/chb_agree"
+        android:text="Aceptar términos y condiciones de uso"
+        android:layout_below="@id/chb_newsletters"
+        android:layout_marginTop="10dp"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_signUp_ok"
+        android:text="Ok"
+        android:layout_below="@id/chb_agree"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorPrimary"/>
+</RelativeLayout>

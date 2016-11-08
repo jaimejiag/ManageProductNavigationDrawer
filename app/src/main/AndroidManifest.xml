@@ -17,9 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProductsActivity" />
-        <activity android:name=".AddProduct"></activity>
-        <activity android:name=".AccountSettingsActivity"></activity>
-        <activity android:name=".GeneralSettingsActivity"></activity>
+        <activity android:name=".AddProduct" />
+        <activity android:name=".AccountSettingsActivity" />
+        <activity android:name=".GeneralSettingsActivity" />
+        <activity android:name=".SignUpActivity"></activity>
     </application>
 
 </manifest>

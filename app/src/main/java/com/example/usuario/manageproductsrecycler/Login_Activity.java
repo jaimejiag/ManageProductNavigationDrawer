@@ -20,6 +20,7 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View 
     private EditText edtPassword;
     private EditText edtUser;
     private Button btnOk;
+    private Button btnSignUp;
     private final String TAG = "loginrelative";
 
 
@@ -40,6 +41,15 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View 
                     Intent intent = new Intent(getApplicationContext(), ProductsActivity.class);
                     startActivity(intent);
                 }
+            }
+        });
+
+        btnSignUp = (Button) findViewById(R.id.btn_signUp);
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(intent);
             }
         });
 
