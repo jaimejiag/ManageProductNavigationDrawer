@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.usuario.manageproductsrecycler.interfaces.ILoginMvp;
+
 /**
  * This class operate the classic login screen using MVP method.
  * @Author Jaime

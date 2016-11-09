@@ -50,19 +50,37 @@
             android:id="@+id/edt_userEmail" />
     </android.support.design.widget.TextInputLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txv_provincia"
+        android:text="Provincia"
+        android:layout_below="@id/til_userEmail"
+        android:layout_marginTop="20dp"/>
+
     <android.support.v7.widget.AppCompatSpinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spn_provincia"
         android:layout_below="@id/til_userEmail"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/txv_provincia">
     </android.support.v7.widget.AppCompatSpinner>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txv_localidad"
+        android:text="Localidad"
+        android:layout_below="@id/txv_provincia"
+        android:layout_marginTop="20dp"/>
 
     <android.support.v7.widget.AppCompatSpinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spn_localidad"
         android:layout_below="@id/spn_provincia"
+        android:layout_toRightOf="@id/txv_localidad"
         android:layout_marginTop="15dp">
     </android.support.v7.widget.AppCompatSpinner>
 
@@ -86,7 +104,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/rbtn_individual"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:checked="true" />
 
         <RadioButton
             android:text="Empresa"
@@ -103,7 +122,8 @@
         android:id="@+id/edt_enterpriseName"
         android:hint="Nombre de la empresa"
         android:layout_below="@id/rgrp_individualEnterprise"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:visibility="gone"/>
 
     <android.support.v7.widget.AppCompatCheckBox
         android:layout_width="match_parent"
@@ -129,5 +149,6 @@
         android:layout_below="@id/chb_agree"
         android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="signUp"/>
 </RelativeLayout>

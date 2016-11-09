@@ -1,27 +1,83 @@
 package com.example.usuario.manageproductsrecycler;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private Button btnOk;
+    private Button btnSignUp;
+    private Spinner spnCounty;
+    private Spinner spnCity;
+    private RadioGroup rgrpIndividualEnterprise;
+    private EditText edtEnterpriseName;
+    private AdapterView.OnItemSelectedListener spinnerListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        btnOk = (Button) findViewById(R.id.btn_signUp_ok);
-        btnOk.setOnClickListener(new View.OnClickListener() {
+        edtEnterpriseName = (EditText) findViewById(R.id.edt_enterpriseName);
+        spnCounty = (Spinner) findViewById(R.id.spn_provincia);
+        spnCity = (Spinner) findViewById(R.id.spn_localidad);
+
+        rgrpIndividualEnterprise = (RadioGroup) findViewById(R.id.rgrp_individualEnterprise);
+        rgrpIndividualEnterprise.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Login_Activity.class);
-                startActivity(intent);
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.rbtn_individual:
+                        showCompany(false);
+                        break;
+
+                    case R.id.rbtn_enterprise:
+                        showCompany(true);
+                        break;
+                }
             }
         });
+
+        loaderSpinnerCounty();
+    }
+
+    public void signUp(View view){
+
+    }
+
+    private void showCompany(boolean b) {
+        edtEnterpriseName.setVisibility(b ? View.VISIBLE : View.GONE);
+    }
+
+    private void loaderSpinnerCounty(){
+        spinnerListener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (view.getId()){
+                    case R.id.spn_provincia:
+
+                        break;
+
+                    case R.id.spn_localidad:
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        };
+
+        //Inicializar el spinner Provincias.
+        //Le pasas el contexto, el array con los datos y por último el layout como se visualizará, en este caso cogemos una predefinido en android.
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.provincias, android.R.layout.simple_spinner_dropdown_item);
+        spnCounty.setAdapter(adapter);
     }
 }

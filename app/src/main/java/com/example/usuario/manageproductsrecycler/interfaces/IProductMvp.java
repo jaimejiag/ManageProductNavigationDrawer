@@ -1,4 +1,4 @@
-package com.example.usuario.manageproductsrecycler;
+package com.example.usuario.manageproductsrecycler.interfaces;
 
 /**
  * Created by jaime on 23/10/16.
