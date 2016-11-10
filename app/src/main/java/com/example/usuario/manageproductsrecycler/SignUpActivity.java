@@ -1,5 +1,8 @@
 package com.example.usuario.manageproductsrecycler;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -56,12 +59,17 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void loaderSpinnerCounty(){
+        //Inicializar el spinner Provincias.
+        //Le pasas el contexto, el array con los datos y por último el layout como se visualizará, en este caso cogemos una predefinido en android.
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.provincias, android.R.layout.simple_spinner_dropdown_item);
+        spnCounty.setAdapter(adapter);
+
         spinnerListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (view.getId()){
+                switch (parent.getId()){
                     case R.id.spn_provincia:
-
+                        loaderSpinnerCity(position);
                         break;
 
                     case R.id.spn_localidad:
@@ -75,9 +83,14 @@ public class SignUpActivity extends AppCompatActivity {
             }
         };
 
-        //Inicializar el spinner Provincias.
-        //Le pasas el contexto, el array con los datos y por último el layout como se visualizará, en este caso cogemos una predefinido en android.
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.provincias, android.R.layout.simple_spinner_dropdown_item);
-        spnCounty.setAdapter(adapter);
+        spnCounty.setOnItemSelectedListener(spinnerListener);
+    }
+
+    private void loaderSpinnerCity(int position) {
+        Resources resources = getResources();
+        TypedArray typedArray = resources.obtainTypedArray(R.array.array_provincia_a_localidades);
+        CharSequence[] citys = typedArray.getTextArray(position);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, citys);
+        spnCity.setAdapter(adapter);
     }
 }
