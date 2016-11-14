@@ -4,4 +4,6 @@
     <string name="action_sort_alphabetically">Ordenar alfabeticamente</string>
     <string name="action_settings_general">Opciones generales</string>
     <string name="action_sattings_account">Configuración cuenta</string>
+    <!-- %1 significa la posición y $s significa el tipo 's' es tipo string (d es double) (Ver SignUpActivity) -->
+    <string name="message_county_city">Ha seleccionado %1$s (%2$s)</string>
 </resources>

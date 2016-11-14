@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -31,22 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
         spnCounty = (Spinner) findViewById(R.id.spn_provincia);
         spnCity = (Spinner) findViewById(R.id.spn_localidad);
 
-        rgrpIndividualEnterprise = (RadioGroup) findViewById(R.id.rgrp_individualEnterprise);
-        rgrpIndividualEnterprise.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
-                    case R.id.rbtn_individual:
-                        showCompany(false);
-                        break;
-
-                    case R.id.rbtn_enterprise:
-                        showCompany(true);
-                        break;
-                }
-            }
-        });
-
+        initRadioClient();
         loaderSpinnerCounty();
     }
 
@@ -73,6 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
                         break;
 
                     case R.id.spn_localidad:
+                        showCitySelected();
                         break;
                 }
             }
@@ -84,6 +71,7 @@ public class SignUpActivity extends AppCompatActivity {
         };
 
         spnCounty.setOnItemSelectedListener(spinnerListener);
+        spnCity.setOnItemSelectedListener(spinnerListener);
     }
 
     private void loaderSpinnerCity(int position) {
@@ -92,5 +80,35 @@ public class SignUpActivity extends AppCompatActivity {
         CharSequence[] citys = typedArray.getTextArray(position);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, citys);
         spnCity.setAdapter(adapter);
+    }
+
+    public void showCitySelected(){
+        Toast.makeText(getApplicationContext(),
+                getString(R.string.message_county_city,
+                        spnCounty.getSelectedItem().toString(),
+                        spnCity.getSelectedItem().toString()),
+                Toast.LENGTH_SHORT).show();
+    }
+
+    private void initRadioClient(){
+        rgrpIndividualEnterprise = (RadioGroup) findViewById(R.id.rgrp_individualEnterprise);
+        rgrpIndividualEnterprise.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.rbtn_individual:
+                        showCompany(false);
+                        break;
+
+                    case R.id.rbtn_enterprise:
+                        showCompany(true);
+                        break;
+                }
+            }
+        });
+    }
+
+    public Boolean validate() {
+        return false;
     }
 }

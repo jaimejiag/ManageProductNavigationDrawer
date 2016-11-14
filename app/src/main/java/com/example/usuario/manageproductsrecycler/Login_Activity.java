@@ -1,14 +1,19 @@
 package com.example.usuario.manageproductsrecycler;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.example.usuario.manageproductsrecycler.interfaces.ILoginMvp;
+import com.example.usuario.manageproductsrecycler.interfaces.IValidateAccount;
+import com.example.usuario.manageproductsrecycler.interfaces.IValidateUser;
+import com.example.usuario.manageproductsrecycler.presenter.LoginPresenter;
 
 /**
  * This class operate the classic login screen using MVP method.
@@ -16,14 +21,15 @@ import com.example.usuario.manageproductsrecycler.interfaces.ILoginMvp;
  * @Version 1.0
  */
 
-public class Login_Activity extends AppCompatActivity implements ILoginMvp.View {
+public class Login_Activity extends AppCompatActivity implements IValidateAccount.View {
 
-    private ILoginMvp.Presenter loginMvp;
+    private IValidateAccount.Presenter loginMvp;
     private EditText edtPassword;
     private EditText edtUser;
     private Button btnOk;
     private Button btnSignUp;
     private final String TAG = "loginrelative";
+    private ViewGroup layout;
 
 
     @Override
@@ -31,6 +37,7 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        layout = (ViewGroup) findViewById(R.id.activity_login_relative_);
         loginMvp = new LoginPresenter(this);
         edtUser = (EditText) findViewById(R.id.edt_user);
         edtPassword = (EditText) findViewById(R.id.edt_password);
@@ -39,10 +46,7 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View 
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (loginMvp.validateCredentials(edtUser.getText().toString(), edtPassword.getText().toString())) {
-                    Intent intent = new Intent(getApplicationContext(), ProductsActivity.class);
-                    startActivity(intent);
-                }
+                ((LoginPresenter)loginMvp).validateCredentialsLogin(edtUser.getText().toString(), edtPassword.getText().toString());
             }
         });
 
@@ -66,14 +70,17 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View 
     }
 
     @Override
-    public void setMessageError(String messageError, int idView) {
-        //Toast.makeText(this, messageError, Toast.LENGTH_SHORT).show();
+    public void setMessageError(String nameResource, int idView) {
+        //Se tiene que recoger el recurso cuyo nombre sea el que se pasa en nameResource.
+        String messageError = getString(getResources().getIdentifier(nameResource, "string", getPackageName()));
         switch (idView){
-            case R.id.edt_user:
-                edtUser.setError(messageError);
+            case R.id.til_user:
+                //edtUser.setError(messageError);
+                Snackbar.make(layout, messageError, Snackbar.LENGTH_SHORT).show();
                 break;
-            case R.id.edt_password:
-                edtPassword.setError(messageError);
+            case R.id.til_password:
+                //edtPassword.setError(messageError);
+                Snackbar.make(layout, messageError, Snackbar.LENGTH_SHORT).show();
         }
     }
 

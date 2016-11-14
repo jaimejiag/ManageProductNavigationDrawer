@@ -1,8 +1,10 @@
-package com.example.usuario.manageproductsrecycler;
+package com.example.usuario.manageproductsrecycler.presenter;
 
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.example.usuario.manageproductsrecycler.ProductApplication;
+import com.example.usuario.manageproductsrecycler.R;
 import com.example.usuario.manageproductsrecycler.interfaces.IProductMvp;
 import com.example.usuario.manageproductsrecycler.modelo.Product;
 

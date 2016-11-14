@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.usuario.manageproductsrecycler.interfaces.IProductMvp;
+import com.example.usuario.manageproductsrecycler.presenter.ProductPresenter;
 
 public class AddProduct extends AppCompatActivity implements IProductMvp.View{
     IProductMvp.Presenter presenter;
