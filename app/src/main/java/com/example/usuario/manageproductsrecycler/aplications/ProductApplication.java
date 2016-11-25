@@ -1,11 +1,13 @@
-package com.example.usuario.manageproductsrecycler;
+package com.example.usuario.manageproductsrecycler.aplications;
 
 import android.app.Application;
 
+import com.example.usuario.manageproductsrecycler.R;
 import com.example.usuario.manageproductsrecycler.modelo.Product;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by usuario on 20/10/16.
@@ -27,6 +29,12 @@ public class ProductApplication extends Application {
 
     public void saveProduct (Product product) {
         products.add(product);
+    }
+
+    public List<Product> getProducts() {
+        Collections.sort(products, Product.PRICE_COMPARATOR);
+        //Collections.sort(products, (p1, p2)-> Double.compare(p1.getmPrice(), p2.getmPrice()));
+        return  products;
     }
 
     public ArrayList<Product> getProducts(boolean ascendente){

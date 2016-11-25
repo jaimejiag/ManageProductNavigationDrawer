@@ -3,47 +3,63 @@ package com.example.usuario.manageproductsrecycler.presenter;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Patterns;
 
 import com.example.usuario.manageproductsrecycler.ProductsActivity;
 import com.example.usuario.manageproductsrecycler.R;
 import com.example.usuario.manageproductsrecycler.interfaces.IValidateAccount;
-import com.example.usuario.manageproductsrecycler.interfaces.IValidateAccount.Presenter;
+import com.example.usuario.manageproductsrecycler.interfaces.IValidateUser;
 import com.example.usuario.manageproductsrecycler.modelo.Error;
+import com.example.usuario.manageproductsrecycler.modelo.User;
+import com.example.usuario.manageproductsrecycler.preferences.AccountPreferences;
 import com.example.usuario.manageproductsrecycler.utils.ErrorMapsUtils;
 
 /**
- * Created by usuario on 6/10/16.
+ * Created by usuario on 16/11/16.
  */
 
-public class LoginPresenter implements Presenter {
-    private IValidateAccount.View view;
+public class SignUpPresenter implements IValidateUser.PresenterUser, IValidateUser.Presenter {
     private int validateUser;
     private int validatePassword;
+    private int validateEmail;
+    private IValidateAccount.View view;
     private Context context;
 
-    public LoginPresenter(IValidateAccount.View view) {
+    public SignUpPresenter (IValidateAccount.View view) {
         this.view = view;
-        context = (Context)view;
+        this.context = (Context)view;
     }
 
-    public void validateCredentialsLogin(String user, String password) {
+    public void validateCredentials(String user, String password, String email) {
         validateUser = validateCredentialsUser(user);
         validatePassword = validateCredentialsPassword(password);
+        validateEmail = validateCredentialEmail(email);
 
         if (validateUser == Error.OK) {
             if (validatePassword == Error.OK) {
-                //Se puede utilizar la llamada al método startActivity con un Intent como
-                //parámetro y no tener que implementar el método startActivity en la vista
-                //porque llama al método super.startActivity dentro de la Activity.
-                view.startActivity();
+                if (validateEmail == Error.OK) {
+                    //Guardarmos en las preferencias.
+                    savePreferences(user, password, email);
+                    view.startActivity();
+                } else {
+                    String nameResource = ErrorMapsUtils.getErrorMap(context).get(String.valueOf(validateEmail));
+                    view.setMessageError(nameResource, R.id.til_userEmail);
+                }
             } else {
                 String nameResource = ErrorMapsUtils.getErrorMap(context).get(String.valueOf(validatePassword));
-                view.setMessageError(nameResource, R.id.til_password);
+                view.setMessageError(nameResource, R.id.til_userPassword);
             }
         } else {
             String nameResource = ErrorMapsUtils.getErrorMap(context).get(String.valueOf(validateUser));
-            view.setMessageError(nameResource, R.id.til_user);
+            view.setMessageError(nameResource, R.id.til_userName);
         }
+    }
+
+    private void savePreferences(String user, String password, String email) {
+        AccountPreferences accountPreferences = (AccountPreferences)AccountPreferences.getInstance(context);
+        accountPreferences.putUser(user);
+        accountPreferences.putPassword(password);
+        accountPreferences.putEmail(email);
     }
 
     public int validateCredentialsUser(String user) {
@@ -67,5 +83,12 @@ public class LoginPresenter implements Presenter {
             result = Error.PASSWORD_LENGTH;
 
         return result;
+    }
+
+    public int validateCredentialEmail(String email) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+            return Error.EMAIL_INVALID;
+        else
+            return Error.OK;
     }
 }

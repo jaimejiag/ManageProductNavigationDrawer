@@ -12,12 +12,14 @@ public interface IValidateAccount {
 
     interface  View {
         void setMessageError(String error, int viewId);
-        void startActivity(Intent intent);
+        void startActivity();
     }
 
     interface Presenter {
+        int validateCredentialsUser(String user);
+        int validateCredentialsPassword(String password);
 
-        static int validateCredentialsUser(String user) {
+        /*static int validateCredentialsUser(String user) {
             if (TextUtils.isEmpty(user)) {
                 return Error.DATA_EMPTY;
             }
@@ -38,6 +40,6 @@ public interface IValidateAccount {
                 result = Error.PASSWORD_LENGTH;
 
             return result;
-        }
+        }*/
     }
 }

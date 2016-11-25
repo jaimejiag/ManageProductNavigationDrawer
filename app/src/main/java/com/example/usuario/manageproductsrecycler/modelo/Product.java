@@ -1,13 +1,21 @@
 package com.example.usuario.manageproductsrecycler.modelo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.example.usuario.manageproductsrecycler.interfaces.IProduct;
+
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Locale;
 
 /**
- * Created by usuario on 20/10/16.
+ * Hemos cambiado Serializable por Parcelable en la clase.
+ * Se deja Serializable para que funcione los Comparator.
  */
 
-public class Product implements Comparable<Product>{
+
+public class Product implements Comparable<Product>, Parcelable, IProduct, Serializable {
     private int mId;
     private String mName;
     private String mDescription;
@@ -16,6 +24,13 @@ public class Product implements Comparable<Product>{
     private double mPrice;
     private int mStock;
     private int mImage;
+
+    public static final Comparator<Product> NAME_COMPARATOR = new Comparator<Product>() {
+        @Override
+        public int compare(Product p1, Product p2) {
+            return p1.mName.compareTo(p2.mName);
+        }
+    };
 
     public static final Comparator<Product> PRICE_COMPARATOR = new Comparator<Product>() {
         @Override
@@ -42,6 +57,55 @@ public class Product implements Comparable<Product>{
         this.mStock = mStock;
         this.mImage = mImage;
     }
+
+
+    //=======================//
+    //Métodos de Parcelable  //
+    //=======================//
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mId);
+        dest.writeString(mName);
+        dest.writeString(mDescription);
+        dest.writeString(mDosage);
+        dest.writeString(mBrand);
+        dest.writeDouble(mPrice);
+        dest.writeInt(mStock);
+        dest.writeInt(mImage);
+    }
+
+    protected Product(Parcel in) {
+        mId = in.readInt();
+        mName = in.readString();
+        mDescription = in.readString();
+        mDosage = in.readString();
+        mBrand = in.readString();
+        mPrice = in.readDouble();
+        mStock = in.readInt();
+        mImage = in.readInt();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
+    //===============//
+    //Fin Parcelable //
+    //===============//
 
 
     public int getmId() {

@@ -1,4 +1,4 @@
-package com.example.usuario.manageproductsrecycler;
+package com.example.usuario.manageproductsrecycler.aplications;
 
 import android.app.Application;
 

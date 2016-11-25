@@ -1,5 +1,6 @@
 package com.example.usuario.manageproductsrecycler;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -82,6 +83,11 @@ public class Login_Activity extends AppCompatActivity implements IValidateAccoun
                 //edtPassword.setError(messageError);
                 Snackbar.make(layout, messageError, Snackbar.LENGTH_SHORT).show();
         }
+    }
+
+    public void startActivity() {
+        Intent intent = new Intent(this, ProductsActivity.class);
+        startActivity(intent);
     }
 
     @Override

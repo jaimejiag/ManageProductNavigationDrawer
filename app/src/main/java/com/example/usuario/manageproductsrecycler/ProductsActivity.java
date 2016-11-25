@@ -1,46 +1,75 @@
 package com.example.usuario.manageproductsrecycler;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.example.usuario.manageproductsrecycler.adapter.ProductAdapter;
 import com.example.usuario.manageproductsrecycler.adapter.ProductAdapterRecycler;
+import com.example.usuario.manageproductsrecycler.interfaces.IProduct;
+import com.example.usuario.manageproductsrecycler.modelo.Product;
+
+import java.io.Serializable;
 
 public class ProductsActivity extends AppCompatActivity {
 
     FloatingActionButton fabtnAdd;
-    private ProductAdapterRecycler adapter;
-    private RecyclerView rcvProduct;
+    private ProductAdapter adapter;
+    //private ProductAdapterRecycler adapter;
+    //private RecyclerView rcvProduct;
+    private ListView listProduct;
     private static final int ADD_PRODUCT = 0;
     private static final int EDIT_PRODUCT = 1;
+    private int pos;
+    public static String PRODUCT_KEY = "product";
+    public static String EDIT_KEY = "edit";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products);
+        setContentView(R.layout.activity_product);
 
 
-        fabtnAdd = (FloatingActionButton) findViewById(R.id.fabtn_add);
+        fabtnAdd = (FloatingActionButton) findViewById(R.id.fbtn_list_add);
         fabtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddProduct.class);
-                startActivity(intent);
+                startActivityForResult(intent, ADD_PRODUCT);
             }
         });
 
-        adapter = new ProductAdapterRecycler(this);
-        rcvProduct = (RecyclerView) findViewById(R.id.rcv_product);
-        rcvProduct.setLayoutManager(new LinearLayoutManager(this));
-        rcvProduct.setHasFixedSize(true);
-        rcvProduct.setAdapter(adapter);
+        listProduct = (ListView) findViewById(R.id.listProduct);
+        adapter = new ProductAdapter(this);
+        listProduct.setAdapter(adapter);
+        listProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(PRODUCT_KEY, (Product)parent.getItemAtPosition(position));
+                pos = position;
+                Intent intent = new Intent(ProductsActivity.this, AddProduct.class);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, EDIT_PRODUCT);
+            }
+        });
+
+        //adapter = new ProductAdapterRecycler(this);
+        //listProduct = (RecyclerView) findViewById(R.id.rcv_product);
+        //listProduct.setLayoutManager(new LinearLayoutManager(this));
+        //listProduct.setHasFixedSize(true);
+        //listProduct.setAdapter(adapter);
     }
 
     /*
@@ -81,11 +110,48 @@ public class ProductsActivity extends AppCompatActivity {
         switch (requestCode){
             case ADD_PRODUCT:
                 if (resultCode == RESULT_OK){
-
+                    recreate();
+                    Product product = (Product)data.getParcelableExtra(PRODUCT_KEY);
+                    ((ProductAdapter)listProduct.getAdapter()).addProduct(product);
                 }
                 break;
+
             case EDIT_PRODUCT:
+                if (resultCode == RESULT_OK) {
+                    //adapter.removeProduct((Product)data.getExtras().getParcelable(PRODUCT_KEY));
+                    adapter.removeProduct((Product)data.getParcelableExtra(PRODUCT_KEY));
+                    adapter.addAt((Product)data.getExtras().getParcelable(EDIT_KEY), pos);
+                }
                 break;
         }
     }
+
+    /*@Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        if (v.getId() == R.id.listProduct) {
+            menu.setHeaderTitle("Opciones de la lista");
+            getMenuInflater().inflate(R.menu.menu_contextual, menu);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId()) {
+            case R.id.action_delete_product:
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(IProduct.PRODUCT_KEY, (Product)listProduct.getItemAtPosition(info.position));
+                ConfirmDialog dialog = new ConfirmDialog();
+                dialog.setArguments(bundle);
+                dialog.show(getSupportFragmentManager(), "SimpleDialog");
+                return true;
+
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+    */
 }

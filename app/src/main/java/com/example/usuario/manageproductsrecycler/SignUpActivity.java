@@ -1,20 +1,28 @@
 package com.example.usuario.manageproductsrecycler;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class SignUpActivity extends AppCompatActivity {
+import com.example.usuario.manageproductsrecycler.interfaces.IValidateUser;
+import com.example.usuario.manageproductsrecycler.modelo.User;
+import com.example.usuario.manageproductsrecycler.presenter.SignUpPresenter;
+
+public class SignUpActivity extends AppCompatActivity implements IValidateUser.View {
 
     private Button btnSignUp;
     private Spinner spnCounty;
@@ -22,22 +30,37 @@ public class SignUpActivity extends AppCompatActivity {
     private RadioGroup rgrpIndividualEnterprise;
     private EditText edtEnterpriseName;
     private AdapterView.OnItemSelectedListener spinnerListener;
+    private SignUpPresenter presenter;
+    private ViewGroup layout;
+    private EditText edtUser;
+    private EditText edtPassword;
+    private EditText edtEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        edtUser = (EditText) findViewById(R.id.edt_userName);
+        edtPassword = (EditText) findViewById(R.id.edt_userPassword);
+        edtEmail = (EditText) findViewById(R.id.edt_userEmail);
+        layout = (RelativeLayout) findViewById(R.id.activity_sign_up);
         edtEnterpriseName = (EditText) findViewById(R.id.edt_enterpriseName);
         spnCounty = (Spinner) findViewById(R.id.spn_provincia);
         spnCity = (Spinner) findViewById(R.id.spn_localidad);
+        presenter = new SignUpPresenter(this);
 
         initRadioClient();
         loaderSpinnerCounty();
     }
 
     public void signUp(View view){
-
+        //Recoger los datos de la vista y llama al método del presentador.
+        presenter.validateCredentials(
+               edtUser.getText().toString(),
+               edtPassword.getText().toString(),
+                edtEmail.getText().toString()
+        );
     }
 
     private void showCompany(boolean b) {
@@ -108,7 +131,35 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    public Boolean validate() {
-        return false;
+    /**
+     * Método que muestra un mensaje personalizado en un componente {@link Snackbar} según el error.
+     * @param nameResource El nombre del String del mensaje de error a mostrar
+     * {@link android.content.res.Resources#getIdentifier(String, String, String)} para obtener el id en la clase R.
+     * @param viewId el id de la vista donde se mostrará el error.
+     */
+    @Override
+    public void setMessageError(String nameResource, int viewId) {
+        String messageError = getString(getResources().getIdentifier(nameResource, "string", getPackageName()));
+
+
+        switch (viewId){
+            case R.id.til_userName:
+                //edtUser.setError(messageError);
+                Snackbar.make(layout, messageError, Snackbar.LENGTH_SHORT).show();
+                break;
+            case R.id.til_userPassword:
+                //edtPassword.setError(messageError);
+                Snackbar.make(layout, messageError, Snackbar.LENGTH_SHORT).show();
+                break;
+            case  R.id.til_userEmail:
+                Snackbar.make(layout, messageError, Snackbar.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    public void startActivity () {
+        Intent intent = new Intent(SignUpActivity.this, ProductsActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
