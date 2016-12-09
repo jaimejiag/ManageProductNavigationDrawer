@@ -13,7 +13,7 @@ import java.util.List;
  * Created by usuario on 20/10/16.
  */
 
-public class ProductApplication extends Application {
+public class ProductRepository extends Application {
     private ArrayList<Product> products = new ArrayList();
 
     @Override
@@ -46,5 +46,9 @@ public class ProductApplication extends Application {
         else
             Collections.sort(products);
         return products;
+    }
+
+    public void deleteProduct(Product product) {
+        //A implementar!
     }
 }

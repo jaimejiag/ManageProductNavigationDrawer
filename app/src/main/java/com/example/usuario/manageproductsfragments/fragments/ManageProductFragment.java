@@ -2,7 +2,6 @@ package com.example.usuario.manageproductsfragments.fragments;
 
 import android.content.Intent;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,9 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.usuario.manageproductsfragments.R;
+import com.example.usuario.manageproductsfragments.interfaces.IProduct;
 import com.example.usuario.manageproductsfragments.interfaces.LoginPresenter;
 import com.example.usuario.manageproductsfragments.modelo.Product;
-import com.example.usuario.manageproductsfragments.presenter.ProductPresenter;
+import com.example.usuario.manageproductsfragments.presenter.ProductPresenterImpl;
 
 import static com.example.usuario.manageproductsfragments.fragments.ListProductFragment.EDIT_KEY;
 import static com.example.usuario.manageproductsfragments.fragments.ListProductFragment.PRODUCT_KEY;
@@ -29,6 +29,11 @@ public class ManageProductFragment extends Fragment implements LoginPresenter.Vi
     EditText edtStock;
     Button btnAdd;
     Product product;
+    private ManageProductListener mCallBack;
+
+    public interface  ManageProductListener {
+        void showListProduct(Bundle bundle);  //Muestra el fragment de añadir o eliminar.
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,7 +44,7 @@ public class ManageProductFragment extends Fragment implements LoginPresenter.Vi
     }
 
     private void initialize() {
-        presenter = new ProductPresenter(this);
+        presenter = new ProductPresenterImpl(this);
         edtName = (EditText) findViewById(R.id.edt_name);
         edtDescription = (EditText) findViewById(R.id.edt_description);
         edtDosage = (EditText) findViewById(R.id.edt_dosage);
@@ -48,7 +53,7 @@ public class ManageProductFragment extends Fragment implements LoginPresenter.Vi
         edtStock = (EditText) findViewById(R.id.edt_stock);
 
         try {
-            product = (Product) getIntent().getExtras().getSerializable(PRODUCT_KEY);
+            product = (Product) getIntent().getExtras().getSerializable(IProduct.PRODUCT_KEY);
         } catch (Exception e) {
 
         }
@@ -76,8 +81,8 @@ public class ManageProductFragment extends Fragment implements LoginPresenter.Vi
                     //Intent intent = new Intent(getApplicationContext(), ListProductFragment.class);
                     //startActivity(intent);
                     Intent intent = getIntent();
-                    intent.putExtra(PRODUCT_KEY, (Parcelable) product);
-                    intent.putExtra(EDIT_KEY, (Parcelable) new Product(
+                    intent.putExtra(IProduct.PRODUCT_KEY, (Parcelable) product);
+                    intent.putExtra(IProduct.EDIT_KEY, (Parcelable) new Product(
                             edtName.getText().toString(),
                             edtDescription.getText().toString(),
                             edtDosage.getText().toString(),

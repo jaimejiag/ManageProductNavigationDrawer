@@ -10,11 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.usuario.manageproductsfragments.R;
-import com.example.usuario.manageproductsfragments.aplications.ProductApplication;
+import com.example.usuario.manageproductsfragments.aplications.ProductRepository;
 import com.example.usuario.manageproductsfragments.modelo.Product;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by usuario on 18/11/16.
@@ -36,7 +37,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
      * @param context
      */
     public ProductAdapter(Context context) {
-        super (context, R.layout.item_product, new ArrayList<Product>(((ProductApplication)context.getApplicationContext()).getProducts()));
+        super (context, R.layout.item_product, new ArrayList<Product>(((ProductRepository)context.getApplicationContext()).getProducts()));
 
         this.context = context;
         ASC = true;
@@ -96,11 +97,14 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
     public void removeProduct(Product product){
         remove(product);
-        notifyDataSetChanged();
     }
 
     public void addAt(Product product, int position){
         insert(product, position);
-        notifyDataSetChanged();
+    }
+
+    public void updateProducts(List<Product> products) {
+        clear();
+        addAll();
     }
 }

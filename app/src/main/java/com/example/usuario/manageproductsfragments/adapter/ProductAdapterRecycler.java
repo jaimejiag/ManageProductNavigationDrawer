@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.usuario.manageproductsfragments.aplications.ProductApplication;
+import com.example.usuario.manageproductsfragments.aplications.ProductRepository;
 import com.example.usuario.manageproductsfragments.R;
 import com.example.usuario.manageproductsfragments.modelo.Product;
 
@@ -29,7 +29,7 @@ public class ProductAdapterRecycler extends RecyclerView.Adapter<ProductAdapterR
 
     public ProductAdapterRecycler(Context context) {
         this.context = context;
-        products = new ArrayList<Product>(((ProductApplication)context.getApplicationContext()).getProducts(true));
+        products = new ArrayList<Product>(((ProductRepository)context.getApplicationContext()).getProducts(true));
     }
 
 
@@ -78,7 +78,7 @@ public class ProductAdapterRecycler extends RecyclerView.Adapter<ProductAdapterR
     public void sortAlphabetically(){
         ASC = !ASC;
         products.clear();
-        products.addAll(((ProductApplication)context.getApplicationContext()).getProducts(ASC));
+        products.addAll(((ProductRepository)context.getApplicationContext()).getProducts(ASC));
         notifyDataSetChanged();     //Notificación a la vista. Patrón Observable-Observador.
     }
 }
