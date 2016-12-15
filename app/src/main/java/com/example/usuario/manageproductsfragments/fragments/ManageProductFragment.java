@@ -13,11 +13,9 @@ import android.widget.EditText;
 import com.example.usuario.manageproductsfragments.R;
 import com.example.usuario.manageproductsfragments.interfaces.IProduct;
 import com.example.usuario.manageproductsfragments.interfaces.LoginPresenter;
+import com.example.usuario.manageproductsfragments.interfaces.ProductPresenter;
 import com.example.usuario.manageproductsfragments.modelo.Product;
 import com.example.usuario.manageproductsfragments.presenter.ProductPresenterImpl;
-
-import static com.example.usuario.manageproductsfragments.fragments.ListProductFragment.EDIT_KEY;
-import static com.example.usuario.manageproductsfragments.fragments.ListProductFragment.PRODUCT_KEY;
 
 public class ManageProductFragment extends Fragment implements LoginPresenter.View {
     LoginPresenter.Presenter presenter;
@@ -38,22 +36,26 @@ public class ManageProductFragment extends Fragment implements LoginPresenter.Vi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        setContentView(R.layout.activity_add_product);
+        super.onCreateView(inflater, container, savedInstanceState);
 
-        initialize();
+        View rootView = inflater.inflate(R.layout.activity_add_product, container, false);
+        return initialize(rootView, savedInstanceState);
     }
 
-    private void initialize() {
-        presenter = new ProductPresenterImpl(this);
-        edtName = (EditText) findViewById(R.id.edt_name);
-        edtDescription = (EditText) findViewById(R.id.edt_description);
-        edtDosage = (EditText) findViewById(R.id.edt_dosage);
-        edtBrand = (EditText) findViewById(R.id.edt_brand);
-        edtPrice = (EditText) findViewById(R.id.edt_price);
-        edtStock = (EditText) findViewById(R.id.edt_stock);
+    private View initialize(View rootView, Bundle arguments) {
+        View view = rootView;
+        Bundle bundle;
+
+        //presenter = new ProductPresenterImpl(this);
+        edtName = (EditText) rootView.findViewById(R.id.edt_name);
+        edtDescription = (EditText) rootView.findViewById(R.id.edt_description);
+        edtDosage = (EditText) rootView.findViewById(R.id.edt_dosage);
+        edtBrand = (EditText) rootView.findViewById(R.id.edt_brand);
+        edtPrice = (EditText) rootView.findViewById(R.id.edt_price);
+        edtStock = (EditText) rootView.findViewById(R.id.edt_stock);
 
         try {
-            product = (Product) getIntent().getExtras().getSerializable(IProduct.PRODUCT_KEY);
+            product = (Product) arguments.getParcelable(IProduct.PRODUCT_KEY);
         } catch (Exception e) {
 
         }
@@ -67,8 +69,8 @@ public class ManageProductFragment extends Fragment implements LoginPresenter.Vi
             edtStock.setText(String.valueOf(product.getmStock()));
         }
 
-        btnAdd = (Button) findViewById(R.id.btn_add);
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        btnAdd = (Button) rootView.findViewById(R.id.btn_add);
+        /*btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (presenter.validateCredentials(          //validateCredentials también añade el producto, si va bien.
@@ -97,6 +99,9 @@ public class ManageProductFragment extends Fragment implements LoginPresenter.Vi
                 }
             }
         });
+        */
+
+        return view;
     }
 
     @Override

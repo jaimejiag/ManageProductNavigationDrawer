@@ -37,12 +37,27 @@ public class ProductPresenterImpl implements ProductPresenter {
         repository.deleteProduct(product);
 
         //Depende de la implementación.
-        loadProduct();
+        //loadProduct();
+        view.showMessageDelete(product);
 
         /*view.getAdapter().deleteProduct();
         if (view.getAdapater().isEmpty())
             view.showEmptyText(true);
         */
+    }
+
+    //Lo hemos implementado para eliminar el producto una vez se cierre el Snackbar.
+    /*@Override
+    public void deleteFinallyProduct(Product product) {
+        repository.deleteProduct(product);
+        loadProduct();
+    }
+    */
+
+    @Override
+    public void addProduct (Product product) {
+        repository.addProduct(product);
+        loadProduct();
     }
 
     @Override

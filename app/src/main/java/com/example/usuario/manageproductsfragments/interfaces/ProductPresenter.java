@@ -14,6 +14,8 @@ public interface ProductPresenter {
     void loadProduct();
     Product getProduct(String id);
     void deleteProduct(Product product);
+    //void deleteFinallyProduct(Product product);
+    void addProduct(Product product);
     void onDestroy();
 
     interface View {
@@ -22,5 +24,7 @@ public interface ProductPresenter {
         void showEmptyText(boolean show);
 
         void showMessage(String message);
+
+        void showMessageDelete(Product product);
     }
 }

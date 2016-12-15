@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -54,6 +55,8 @@ public class ListProductFragment extends Fragment implements  ProductPresenter.V
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
+
         adapter = null;
         presenter = null;
     }
@@ -145,7 +148,36 @@ public class ListProductFragment extends Fragment implements  ProductPresenter.V
 
     }
 
+    //Método que muestra un snackbar con un botón de deshacer la acción de eliminación de producto.
+    @Override
+    public void showMessageDelete(final Product product) {
+        Snackbar.make(getView(), "Producto eliminado", Snackbar.LENGTH_SHORT)
+                .setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        presenter.addProduct(product);
+                    }
+                }).show();
+
+
+        /*
+        //SETCALLBACK (hacer una llamada a un método callback de un Snackbar.
+        //incluso si el Snackbar se ha eliminado mediante Swipe.
+        .setCallback(new Snackbar.Callback(){
+
+            @Override
+            public void onDismissed(Snackbar snackbar, int event) {
+                super.onDismissed(snackbar, event);
+
+                if (event == DISMISS_EVENT_TIMEOUT || event == DISMISS_EVENT_SWIPE)
+                    presenter.deleteFinallyProduct(product);
+            }
+        }).show();
+        */
+    }
     public void deleteObject(Object object) {
 
     }
+
+
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.usuario.manageproductsfragments.fragments.ListProductFragment;
 import com.example.usuario.manageproductsfragments.interfaces.IValidateAccount;
@@ -29,6 +30,7 @@ public class Login_Activity extends AppCompatActivity implements IValidateAccoun
     private Button btnSignUp;
     private final String TAG = "loginrelative";
     private ViewGroup layout;
+    private boolean quitApp;
 
 
     @Override
@@ -36,6 +38,7 @@ public class Login_Activity extends AppCompatActivity implements IValidateAccoun
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        quitApp = false;
         layout = (ViewGroup) findViewById(R.id.activity_login_relative_);
         loginMvp = new LoginPresenterImpl(this);
         edtUser = (EditText) findViewById(R.id.edt_user);
@@ -84,7 +87,7 @@ public class Login_Activity extends AppCompatActivity implements IValidateAccoun
     }
 
     public void startActivity() {
-        Intent intent = new Intent(this, ListProductFragment.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
@@ -92,5 +95,16 @@ public class Login_Activity extends AppCompatActivity implements IValidateAccoun
     protected void onStop() {
         super.onStop();
         Log.d(TAG, "Activity finalizada");
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (quitApp) {
+            finish();
+        } else {
+            Toast.makeText(this, "Pulsa de nuevo para salir.",
+                    Toast.LENGTH_SHORT).show();
+            quitApp = true;
+        }
     }
 }

@@ -51,4 +51,8 @@ public class ProductRepository extends Application {
     public void deleteProduct(Product product) {
         //A implementar!
     }
+
+    public void addProduct(Product product) {
+        products.add(product);
+    }
 }
