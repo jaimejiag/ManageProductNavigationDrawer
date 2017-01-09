@@ -24,6 +24,7 @@ public class Product implements Comparable<Product>, Parcelable, IProduct, Seria
     private double mPrice;
     private int mStock;
     private int mImage;
+    private int idCategory;
 
     public static final Comparator<Product> NAME_COMPARATOR = new Comparator<Product>() {
         @Override
@@ -172,6 +173,13 @@ public class Product implements Comparable<Product>, Parcelable, IProduct, Seria
         this.mImage = mImage;
     }
 
+    public int getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
+    }
 
     //Para formatos
     public String getFormatedPrice(){ return String.format("$%s", mPrice);}
