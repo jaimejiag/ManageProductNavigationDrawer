@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ManageProductsFragment</string>
+    <string name="app_name">ManageProductsDB</string>
     <string name="action_add_product">Añadir producto</string>
     <string name="action_sort_alphabetically">Ordenar alfabeticamente</string>
     <string name="action_settings_general">Opciones generales</string>

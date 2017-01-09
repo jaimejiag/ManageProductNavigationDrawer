@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00c853</color>
+    <color name="colorPrimary">#91c9a8</color>
     <color name="colorPrimaryDark">#2e7d32</color>
-    <color name="colorAccent">#ff4081</color>
+    <color name="colorAccent">#1e3f0d</color>
     <color name="colorPar">#80f784</color>
     <color name="colorImpar">#ffffff</color>
-
+    <color name="background_statusBar">#b0bec5</color>
+    <color name="background_action_mode">#2e7d32</color>
 </resources>
