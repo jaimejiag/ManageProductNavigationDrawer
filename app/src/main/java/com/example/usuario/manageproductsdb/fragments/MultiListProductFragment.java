@@ -104,8 +104,8 @@ public class MultiListProductFragment extends Fragment implements  ProductPresen
         //Damos propiedad multichoice a la lista.
         listProduct.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         multiChoicePresenter = new MultiChoicePresenter((ProductPresenterImpl) presenter);
-        SimpleMultiChoiceModeListener mCl = new SimpleMultiChoiceModeListener(getActivity().getWindow().getContext(), multiChoicePresenter);
-        listProduct.setMultiChoiceModeListener(mCl);
+        //SimpleMultiChoiceModeListener mCl = new SimpleMultiChoiceModeListener(getActivity().getWindow().getContext(), multiChoicePresenter);
+        //listProduct.setMultiChoiceModeListener(mCl);
         listProduct.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {

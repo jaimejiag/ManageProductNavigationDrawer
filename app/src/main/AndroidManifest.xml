@@ -10,17 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.example.usuario.manageproductsdb.Login_Activity">
+
+        </activity>
+
+        <activity android:name="com.example.usuario.manageproductsdb.AccountSettingsActivity" />
+        <activity android:name="com.example.usuario.manageproductsdb.GeneralSettingsActivity" />
+        <activity android:name="com.example.usuario.manageproductsdb.SignUpActivity" android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name="com.example.usuario.manageproductsdb.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.example.usuario.manageproductsdb.AccountSettingsActivity" />
-        <activity android:name="com.example.usuario.manageproductsdb.GeneralSettingsActivity" />
-        <activity android:name="com.example.usuario.manageproductsdb.SignUpActivity" android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name="com.example.usuario.manageproductsdb.HomeActivity" />
     </application>
 
 </manifest>

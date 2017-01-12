@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_home"
+            android:icon="@drawable/ic_home"
+            android:title="Inicio"/>
+
+        <item
+            android:id="@+id/action_products"
+            android:icon="@drawable/ic_products"
+            android:title="Productos"/>
+
+        <item
+            android:id="@+id/action_pharmacy"
+            android:icon="@drawable/ic_pharmacy"
+            android:title="Farmacia"/>
+
+        <item
+            android:id="@+id/action_invoice"
+            android:icon="@drawable/ic_invoice"
+            android:title="Venta"/>
+    </group>
+
+    <item
+        android:id="@+id/navigation_subheader"
+        android:title="Configuración">
+
+        <menu>
+            <item
+                android:id="@+id/action_help"
+                android:icon="@drawable/ic_help"
+                android:title="Ayuda"/>
+
+            <item
+                android:id="@+id/action_config"
+                android:icon="@drawable/ic_settings"
+                android:title="Configuración"/>
+        </menu>
+    </item>
+</menu>

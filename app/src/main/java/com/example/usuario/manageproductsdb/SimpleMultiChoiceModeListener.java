@@ -44,10 +44,10 @@ public class SimpleMultiChoiceModeListener implements AbsListView.MultiChoiceMod
     public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
         if (checked) {
             cont++;
-            presenter.setNewSelection(position, checked);
+            //presenter.setNewSelection(position, checked);
         } else {
             cont--;
-            presenter.removeSelection(position);
+            //presenter.removeSelection(position);
         }
 
         mode.setTitle(cont);
@@ -90,7 +90,7 @@ public class SimpleMultiChoiceModeListener implements AbsListView.MultiChoiceMod
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete_product:
-                presenter.deleteSelectedProduct();
+                //presenter.deleteSelectedProduct();
                 break;
         }
 
@@ -104,7 +104,7 @@ public class SimpleMultiChoiceModeListener implements AbsListView.MultiChoiceMod
             ((AppCompatActivity)context).getWindow().setStatusBarColor(statusBarColor);
         }
 
-        presenter.clearSelection();
+        //presenter.clearSelection();
 
         for (View v: listView) {
             v.setVisibility(View.VISIBLE);
